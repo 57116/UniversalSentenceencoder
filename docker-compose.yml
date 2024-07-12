@@ -1,0 +1,22 @@
+version: '3'
+services:
+  react-app:
+    build:
+      context: ./frontend/use-qa-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    volumes:
+      - .:/app
+    command: npm start
